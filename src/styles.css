@@ -1,0 +1,16 @@
+
+html, body {
+  margin: 0; /* Eliminar márgenes por defecto */
+  padding: 0; /* Eliminar padding por defecto */
+  height: 100%; /* Asegurar que el HTML y el body ocupen el 100% de la pantalla */
+}
+
+body {
+  background-image: url(./assets/wallpaper/violeta.jpg);
+  background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+  background-attachment: fixed; /* Fija el fondo, no se desplaza */
+  height: 100vh;
+  width: 100%;
+}
