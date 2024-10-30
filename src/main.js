@@ -1,41 +1,29 @@
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
-  const windowsIcon = document.getElementById('windows-icon');
-  const menu = document.getElementById('windows-menu');
+    const windowsIcon = document.getElementById('windows-icon');
+    const menu = document.getElementById('windows-menu');
 
-  windowsIcon.addEventListener('click', function() {
-      console.log('Icono de Windows clicado'); // Mensaje para verificar el clic
-      if (menu.style.display === 'block') {
-          menu.style.display = 'none'; // Ocultar el menú
-      } else {
-          menu.style.display = 'block'; // Mostrar el menú
-      }
-  });
+    windowsIcon.addEventListener('click', function() {
+        console.log('Icono de Windows clicado');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+        }
+    });
 
-///////////////////////////////////////////////////////////////////////////////////////////
-
-    // Selecciona todos los botones y contenedores
+    // Mostrar/Ocultar divs de años
     const yearButtons = document.querySelectorAll('.añitos');
     const containers = document.querySelectorAll('.container-year');
-
-    // Verifica si existen los botones y contenedores
     if (yearButtons.length === 0 || containers.length === 0) {
         console.error("No se encontraron los botones de años o contenedores en el DOM.");
         return;
     }
-
-    // Oculta todos los contenedores al inicio
     containers.forEach(container => container.style.display = 'none');
 
-    // Agrega el evento a cada botón para mostrar el contenedor correspondiente
     yearButtons.forEach(btn => {
         btn.addEventListener('click', function () {
-            containers.forEach(container => container.style.display = 'none'); // Oculta todos los contenedores
+            containers.forEach(container => container.style.display = 'none');
             const targetContainer = document.querySelector(`.${btn.dataset.target}`);
-            
-            // Si el contenedor existe, se muestra
             if (targetContainer) {
                 targetContainer.style.display = 'block';
                 console.log(`Mostrando contenedor: ${btn.dataset.target}`);
@@ -44,22 +32,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // Mostrar/Ocultar menú de configuración
     const menuButtonConfig = document.getElementById('fotos');
-        const submenuConfig = document.getElementById('menu_fotos');
+    const submenuConfig = document.getElementById('menu_fotos');
+    if (menuButtonConfig && submenuConfig) {
+        console.log("Icono de Configuración y menú encontrados.");
+        menuButtonConfig.addEventListener('click', () => {
+            console.log("Icono de configuración clicado");
+            if (submenuConfig.style.display === 'none' || submenuConfig.style.display === '') {
+                submenuConfig.style.display = 'block';
+                console.log("Menú de configuración mostrado");
+            } else {
+                submenuConfig.style.display = 'none';
+                console.log("Menú de configuración ocultado");
+            }
+        });
+    } else {
+        console.error("No se encontraron el icono o el menú de configuración en el DOM");
+    }
 
-        if (menuButtonConfig && submenuConfig) {
+        // Mostrar/Ocultar menú de configuración
+        const menuButtonFotos = document.getElementById('configuracion');
+        const submenuFotos = document.getElementById('menu_config');
+        if (menuButtonFotos && submenuFotos) {
             console.log("Icono de Configuración y menú encontrados.");
-
-            menuButtonConfig.addEventListener('click', () => {
+            menuButtonFotos.addEventListener('click', () => {
                 console.log("Icono de configuración clicado");
-
-                if (submenuConfig.style.display === 'none' || submenuConfig.style.display === '') {
-                    submenuConfig.style.display = 'block';
+                if (submenuFotos.style.display === 'none' || submenuFotos.style.display === '') {
+                    submenuFotos.style.display = 'block';
                     console.log("Menú de configuración mostrado");
                 } else {
-                    submenuConfig.style.display = 'none';
+                    submenuFotos.style.display = 'none';
                     console.log("Menú de configuración ocultado");
                 }
             });
@@ -67,34 +71,54 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error("No se encontraron el icono o el menú de configuración en el DOM");
         }
 
-///////////////////////////////////////////////////////////////////////
+    
+    // Cerrar aplicación al hacer clic en el icono de cierre
     const imagen = document.querySelector('.icono_cerrar');
-
-    // Agregamos un evento de clic a la imagen
     imagen.addEventListener('click', function() {
-        // Seleccionamos el div por su ID y lo ocultamos
         const div = document.getElementById('menu_fotos');
-        div.style.display = 'none'; // Esto oculta el div
+        
+        
+        div.style.display = 'none';
     });
-});
 
-const menuButton = document.getElementById('menuButton');
-const submenu = document.getElementById('submenu');
+    
 
-menuButton.addEventListener('click', () => {
-    if (submenu.classList.contains('hide')) {
-        submenu.classList.remove('hide');
-        submenu.classList.add('show');
+    // Arrastre con límites para el contenedor de la aplicación
+    const nombreApp = document.querySelector('.nombre_app');
+    const container = document.getElementById('menu_fotos');
+    const container2 = document.getElementById('menu_config');
+    let isDragging = false;
+    let startX, startY;
+
+    if (nombreApp && container) {
+        nombreApp.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX - container.offsetLeft;
+            startY = e.clientY - container.offsetTop;
+            container.style.position = 'absolute';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const newLeft = e.clientX - startX;
+                const newTop = e.clientY - startY;
+
+                // Limitar el movimiento dentro de la ventana
+                const maxLeft = window.innerWidth - container.offsetWidth;
+                const maxTop = window.innerHeight - container.offsetHeight;
+
+                // Aplicar los límites
+                container.style.left = `${Math.min(Math.max(0, newLeft), maxLeft)}px`;
+                container.style.top = `${Math.min(Math.max(0, newTop), maxTop)}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
     } else {
-        submenu.classList.remove('show');
-        submenu.classList.add('hide');
+        console.error("Elemento para arrastrar o contenedor no encontrado.");
     }
+
+
 });
-
-
-
-
-
-
-
-

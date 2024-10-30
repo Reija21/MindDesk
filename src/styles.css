@@ -345,7 +345,8 @@ img {
 
 
 /* Ventana de configuración */
-#menu_fotos {
+#menu_fotos,
+#menu_config {
   position: absolute;
   top: 10%; /* Ajusta según tu diseño */
   left: 20%; /* Ajusta según tu diseño */
@@ -396,7 +397,7 @@ img {
   grid-area: n3;
   right: 2%;
   top: 0%;
-  width: 60%;
+  width: 50%;
   display: inline-block;
 }
 
@@ -405,19 +406,30 @@ img {
 
 }
 
+.nombre_app {
+  width: 1200%;
+}
+
 span {
   font-size: 18px;
   font-weight: bold;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+em {
+  font-size: 21px;
+  position: absolute;
+  text-align: center;
+  left: 40%;
+  top: 40%;
+}
 
 .container-1 {
-  width: 12%;
+  width: 14%;
   height: 83%;
   position: absolute;
   top: 10%;
-  left: 1%;
+  left: 0%;
 }
 
 .container-year {
@@ -431,9 +443,10 @@ span {
   overflow-x: hidden;
   overflow-y: scroll;  
   display: none;
+
 }
 
-        /* Ocultar scrollbar solo en Chrome, Safari y Opera */
+/* Ocultar scrollbar solo en Chrome, Safari y Opera */
 .container-year::-webkit-scrollbar {
   display: none; /* Oculta la barra de desplazamiento */
 }
@@ -453,22 +466,6 @@ span {
   border-radius: 7px;
 }
 
-
-.container-3 {
-  border:2px solid #ff09d2;
-}
-
-.container-4 {
-  border:2px solid #15ff00;
-}
-
-.container-5 {
-  border:2px solid #ffa600;
-}
-
-.container-6 {
-  border:2px solid #1ca873;
-}
 
 
 .lineas {
@@ -490,7 +487,7 @@ span {
 #linea-14 {top: 715%;} #linea-15 {top: 770%;} #linea-16 {top: 825%;}
 #linea-17 {top: 880%;} #linea-18 {top: 935%;} #linea-19 {top: 990%;}
 
-.imgs-linea {width: 88%; top: 0%;}
+.imgs-linea {width: 89%;  top: 0%; border-radius: 13px; object-fit: cover;}
 
 .img1_linea-1 {grid-area: n1;}
 .img2_linea-1 {grid-area: n2;}
@@ -502,3 +499,9 @@ span {
 .img2_linea-2 {grid-area: n2;}
 .img3_linea-2 {grid-area: n3;}
 .img4_linea-2 {grid-area: n4;}
+
+.special {
+  width: 90%;
+  height: 100%;
+  object-fit: cover; /* Controla cómo se ajusta el contenido */
+}
